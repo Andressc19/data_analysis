@@ -14,3 +14,7 @@ print(f"========== PARENTAL EDUCATION / AVG SCORE ==========\n{df_ple_avg}")
 # average score per gender
 df_avg_gender = df.groupby("gender")["avg_score"].mean() 
 print(f"========== AVG PER GENDER ==========\n{df_avg_gender}")
+
+# average score vs preparation course
+df_avg_prc = df.groupby("test preparation course")["avg_score"].mean()
+print(f"========== AVG / PREPARATION COURSE ==========\n{df_avg_prc}")
