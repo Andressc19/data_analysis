@@ -1,6 +1,6 @@
 import pandas as pd
 from app.utils import write_dataset
-from app.validations import check_column_na, check_df_summary, check_unique, normalize_to_upper
+from app.validations import check_column_na, check_unique, normalize_to_upper, check_range
 
 # define constants to src files
 DATA_DIR = "datasets"
@@ -22,11 +22,10 @@ write_dataset(
 
 check_unique(df_normalized)
 check_column_na(df_normalized)
-check_df_summary(df_normalized)
+check_range(df_normalized)
 
 # load normalized csv file
 df_normalized = pd.read_csv(NORMALIZED_CSV)
-
 
 # create a new dataset file with avg score column
 write_dataset(

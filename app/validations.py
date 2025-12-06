@@ -1,5 +1,3 @@
-import pandas as pd
-
 def normalize_to_upper(dataframe):
     """
         function to normalize to upper each string column value
@@ -24,8 +22,6 @@ def check_unique(dataframe):
         print(f"Valores únicos en la columna '{col}':\n{dataframe[col].unique()}\n")
 
 
-def check_df_summary(dataframe: str):
-    """
-        function to show dataframe's summary
-    """
-    print(f"Información general del dataset \n{dataframe.info()}")
+def check_range(dataframe):
+    for col in dataframe.select_dtypes(include="int"):
+        print(f"{col.upper()}\n{dataframe[col].agg(["min", "max"])}")
