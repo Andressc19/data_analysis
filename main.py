@@ -1,7 +1,14 @@
 import pandas as pd
 
+# define constants to src files
 SOURCE_CSV = "datasets/StudentsPerformance.csv"
 AVG_CALCULATED = "datasets/StudentsPerformance_AVG.csv"
+
+# write a dataset an return output file
+def write_dataset(source: str, output: str, execute):
+    df = pd.read_csv(source)
+    execute()
+    df.to_csv(output)
 
 # read csv file
 df_raw = pd.read_csv(SOURCE_CSV)
