@@ -1,39 +1,43 @@
 import pandas as pd
+from app.utils import write_dataset
+from pandas import DataFrame
+
 
 # define constants to src files
-SOURCE_CSV = "datasets/StudentsPerformance.csv"
-AVG_CALCULATED = "datasets/StudentsPerformance_AVG.csv"
+ROOT_DIR = "datasets"
+RAW_CSV = f"{ROOT_DIR}/StudentsPerformance.csv"
+AVG_CSV = f"{ROOT_DIR}/StudentsPerformance_AVG.csv"
 
-# write a dataset an return output file
-def write_dataset(source: str, output: str, execute):
-    df = pd.read_csv(source)
-    execute()
-    df.to_csv(output)
 
 # read csv file
-df_raw = pd.read_csv(SOURCE_CSV)
+df_raw = pd.read_csv(RAW_CSV)
 
-# average score in each field
-average_score = df_raw[["math score", "reading score", "writing score"]].mean()
+# create a new dataset file with avg score column
+write_dataset(
+    RAW_CSV,
+    AVG_CSV,
+    lambda df: df.assign(
+        avg_score = df[["math score", "reading score", "writing score"]].mean(axis=1)
+    )
+)
 
-# relation of parental level education and avg score
-df_raw["avg_score"] = df_raw[["math score", "reading score", "writing score"]].mean(axis=1)
-df_ple_avg = df_raw.groupby("parental level of education")["avg_score"].mean()
+# parental level of education (PLE) vs avg_score (AVG)
+write_dataset(
+    AVG_CSV,
+    f"{ROOT_DIR}/StudentsPerformance_PLE_AVG.csv",
+    lambda df: df.groupby("parental level of education")["avg_score"].mean().reset_index()
+)
 
-# write AVG column on csv
-df_raw.to_csv(path_or_buf=AVG_CALCULATED)
-df = pd.read_csv(AVG_CALCULATED)
+# lunch type (LUNCH) vs avg_score (AVG) 
+write_dataset(
+    AVG_CSV,
+    f"{ROOT_DIR}/StudentsPerformance_LUNCH_AVG.csv",
+    lambda df: df.groupby("lunch")["avg_score"].mean().reset_index()
+)
 
-print(f"========== PARENTAL EDUCATION / AVG SCORE ==========\n{df_ple_avg}")
-
-# average score per gender
-df_avg_gender = df.groupby("gender")["avg_score"].mean() 
-print(f"========== AVG PER GENDER ==========\n{df_avg_gender}")
-
-# average score vs preparation course
-df_avg_prc = df.groupby("test preparation course")["avg_score"].mean()
-print(f"========== AVG / PREPARATION COURSE ==========\n{df_avg_prc}")
-
-# group by group 
-df_group = df.groupby("race/ethnicity").size()
-print(f"========== COUNT / GROUP ==========\n{df_group}")
+# preparation course (TPC) vs avg_score (AVG) 
+write_dataset(
+    AVG_CSV,
+    f"{ROOT_DIR}/StudentsPerformance_TPC_AVG.csv",
+    lambda df: df.groupby("test preparation course")["avg_score"].mean().reset_index()
+)
