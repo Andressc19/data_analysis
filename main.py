@@ -1,13 +1,16 @@
 import pandas as pd
 from app.utils import write_dataset
-from pandas import DataFrame
-
+from app.validations import check_column_na, check_df_summary, check_unique
 
 # define constants to src files
 ROOT_DIR = "datasets"
 RAW_CSV = f"{ROOT_DIR}/StudentsPerformance.csv"
 AVG_CSV = f"{ROOT_DIR}/StudentsPerformance_AVG.csv"
 
+# cleaning, checks nulls and summary in dataset
+check_unique(RAW_CSV)
+check_column_na(RAW_CSV)
+check_df_summary(RAW_CSV)
 
 # read csv file
 df_raw = pd.read_csv(RAW_CSV)
