@@ -1,23 +1,24 @@
 import pandas as pd
 
-
-def check_column_na(source: str):
+def check_column_na(dataframe):
     """
         function to check null values per column
     """
-    df = pd.read_csv(source)
-    print(f"Datos nulos por columna\n{df.isnull().sum()}\n")
+    print(f"Datos nulos por columna\n{dataframe.isnull().sum()}\n")
 
 
-def check_unique(source: str):
+def check_unique(dataframe):
     """
         function to check unique values for each column
     """
-    df = pd.read_csv(source)
-    for col in df.columns:
-        print(f"Valores únicos en la columna '{col}':\n{df[col].unique()}")
+    for col in dataframe.columns:
+        print(f"Valores únicos en la columna '{col}':\n{dataframe[col].unique()}")
 
 
-def check_df_summary(source: str):
-    df = pd.read_csv(source)
+def check_df_summary(dataframe: str):
+    """
+        function to show dataframe's summary
+    """
+    df = pd.read_csv(dataframe)
     print(f"Info table\n{df.info()}")
+
