@@ -1,23 +1,36 @@
 import pandas as pd
 from app.utils import write_dataset
-from app.validations import check_column_na, check_df_summary, check_unique
+from app.validations import check_column_na, check_df_summary, check_unique, normalize_to_upper
 
 # define constants to src files
-ROOT_DIR = "datasets"
-RAW_CSV = f"{ROOT_DIR}/StudentsPerformance.csv"
-AVG_CSV = f"{ROOT_DIR}/StudentsPerformance_AVG.csv"
+DATA_DIR = "datasets"
+RAW_CSV = f"{DATA_DIR}/StudentsPerformance.csv"
+AVG_CSV = f"{DATA_DIR}/StudentsPerformance_AVG.csv"
+NORMALIZED_CSV =f"{DATA_DIR}/StudentsPerformance_NORMALIZED.csv"
 
 # read csv file
 df_raw = pd.read_csv(RAW_CSV)
 
 # cleaning, checks nulls and summary in dataset
-check_unique(RAW_CSV)
-check_column_na(RAW_CSV)
-check_df_summary(RAW_CSV)
+df_normalized = normalize_to_upper(df_raw)
+
+# create a new csv file with normalized values
+write_dataset(
+    df_normalized,
+    NORMALIZED_CSV
+)
+
+check_unique(df_normalized)
+check_column_na(df_normalized)
+check_df_summary(df_normalized)
+
+# load normalized csv file
+df_normalized = pd.read_csv(NORMALIZED_CSV)
+
 
 # create a new dataset file with avg score column
 write_dataset(
-    RAW_CSV,
+    df_normalized,
     AVG_CSV,
     lambda df: df.assign(
         avg_score = df[["math score", "reading score", "writing score"]].mean(axis=1)
@@ -27,20 +40,20 @@ write_dataset(
 # parental level of education (PLE) vs avg_score (AVG)
 write_dataset(
     AVG_CSV,
-    f"{ROOT_DIR}/StudentsPerformance_PLE_AVG.csv",
+    f"{DATA_DIR}/StudentsPerformance_PLE_AVG.csv",
     lambda df: df.groupby("parental level of education")["avg_score"].mean().reset_index()
 )
 
 # lunch type (LUNCH) vs avg_score (AVG) 
 write_dataset(
     AVG_CSV,
-    f"{ROOT_DIR}/StudentsPerformance_LUNCH_AVG.csv",
+    f"{DATA_DIR}/StudentsPerformance_LUNCH_AVG.csv",
     lambda df: df.groupby("lunch")["avg_score"].mean().reset_index()
 )
 
 # preparation course (TPC) vs avg_score (AVG) 
 write_dataset(
     AVG_CSV,
-    f"{ROOT_DIR}/StudentsPerformance_TPC_AVG.csv",
+    f"{DATA_DIR}/StudentsPerformance_TPC_AVG.csv",
     lambda df: df.groupby("test preparation course")["avg_score"].mean().reset_index()
 )
