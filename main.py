@@ -23,31 +23,35 @@ check_range(df_normalized)
 df_normalized = pd.read_csv(NORMALIZED_CSV)
 
 # create a new dataset file with avg score column
-write_dataset(
-    df_normalized,
-    AVG_CSV,
-    lambda df: df.assign(
-        avg_score = df[["math score", "reading score", "writing score"]].mean(axis=1)
+def getAvgScore():
+    write_dataset(
+        df_normalized,
+        AVG_CSV,
+        lambda df: df.assign(
+            avg_score = df[["math score", "reading score", "writing score"]].mean(axis=1)
+        )
     )
-)
 
 # parental level of education (PLE) vs avg_score (AVG)
-write_dataset(
-    AVG_CSV,
-    f"{DATA_DIR}/StudentsPerformance_PLE_AVG.csv",
-    lambda df: df.groupby("parental level of education")["avg_score"].mean().reset_index()
-)
+def getPleAvg():
+    write_dataset(
+        AVG_CSV,
+        f"{DATA_DIR}/StudentsPerformance_PLE_AVG.csv",
+        lambda df: df.groupby("parental level of education")["avg_score"].mean().reset_index()
+    )
 
 # lunch type (LUNCH) vs avg_score (AVG) 
-write_dataset(
-    AVG_CSV,
-    f"{DATA_DIR}/StudentsPerformance_LUNCH_AVG.csv",
-    lambda df: df.groupby("lunch")["avg_score"].mean().reset_index()
-)
+def getLunchAvg():
+    write_dataset(
+        AVG_CSV,
+        f"{DATA_DIR}/StudentsPerformance_LUNCH_AVG.csv",
+        lambda df: df.groupby("lunch")["avg_score"].mean().reset_index()
+    )
 
 # preparation course (TPC) vs avg_score (AVG) 
-write_dataset(
-    AVG_CSV,
-    f"{DATA_DIR}/StudentsPerformance_TPC_AVG.csv",
-    lambda df: df.groupby("test preparation course")["avg_score"].mean().reset_index()
-)
+def getTpcAvg():
+    write_dataset(
+        AVG_CSV,
+        f"{DATA_DIR}/StudentsPerformance_TPC_AVG.csv",
+        lambda df: df.groupby("test preparation course")["avg_score"].mean().reset_index()
+    )

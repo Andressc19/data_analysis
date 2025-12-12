@@ -20,11 +20,5 @@ print("MEDIA AVG SCORE:\n",df_avg.mean())
 sns.histplot(df_avg, bins=30, kde=True)
 plt.show()
 
-
 sns.histplot(data=df, x='avg_score', hue='race/ethnicity', kde=True)
 plt.show()
-
-
-
-
-# find out distribution
