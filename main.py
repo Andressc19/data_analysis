@@ -1,12 +1,7 @@
 import pandas as pd
 from app.utils import write_dataset
 from app.validations import check_column_na, check_unique, normalize_to_upper, check_range
-
-# define constants to src files
-DATA_DIR = "datasets"
-RAW_CSV = f"{DATA_DIR}/StudentsPerformance.csv"
-AVG_CSV = f"{DATA_DIR}/StudentsPerformance_AVG.csv"
-NORMALIZED_CSV =f"{DATA_DIR}/StudentsPerformance_NORMALIZED.csv"
+from constants import DATA_DIR, RAW_CSV, AVG_CSV, NORMALIZED_CSV
 
 # read csv file
 df_raw = pd.read_csv(RAW_CSV)
