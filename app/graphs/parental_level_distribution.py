@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from ..constants import NORMALIZED_CSV
+from ..constants import NORMALIZED_CSV, PARENTAL_LEVEL_GRAPH
 
 # Load csv
 df_students = pd.read_csv(NORMALIZED_CSV)
@@ -38,6 +38,6 @@ for p in ax.patches:
 plt.tight_layout()
 
 # Export chart
-plt.savefig("outputs/parentar_level_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig(PARENTAL_LEVEL_GRAPH, dpi=300, bbox_inches="tight")
 
 plt.show()

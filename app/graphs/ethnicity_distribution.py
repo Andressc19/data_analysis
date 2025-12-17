@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from ..constants import NORMALIZED_CSV
+from ..constants import NORMALIZED_CSV, ETHNICITY_DISTRIBUTION
 
 # Load csv
 df_students = pd.read_csv(NORMALIZED_CSV)
@@ -39,6 +39,6 @@ for p in ax.patches:
 plt.tight_layout()
 
 # Export chart
-plt.savefig("outputs/ethnicity_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig(ETHNICITY_DISTRIBUTION, dpi=300, bbox_inches="tight")
 
 plt.show()

@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from ..constants import NORMALIZED_CSV
+from ..constants import NORMALIZED_CSV, COURSE_DISTRIBUTION_GRAPH
 
 # Load csv
 df_students = pd.read_csv(NORMALIZED_CSV)
@@ -17,8 +17,8 @@ plt.figure(figsize=(7, 5))
 order = df_students["test preparation course"].value_counts().index
 
 palette = {
-    "COMPLETED": "#5DA9A4",  # azul verdoso
-    "NONE": "#B0B0B0"        # gris neutro
+    "COMPLETED": "#5DA9A4",
+    "NONE": "#B0B0B0" 
 }
 
 ax = sns.countplot(
@@ -45,6 +45,6 @@ for p in ax.patches:
 plt.tight_layout()
 
 # Export chart
-plt.savefig("outputs/course_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig(COURSE_DISTRIBUTION_GRAPH, dpi=300, bbox_inches="tight")
 
 plt.show()

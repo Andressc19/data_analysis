@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from ..constants import NORMALIZED_CSV
+from ..constants import NORMALIZED_CSV, GENDER_DISTRIBUTION
 
 # Load csv
 df_students = pd.read_csv(NORMALIZED_CSV)
@@ -44,6 +44,6 @@ for p in ax.patches:
 plt.tight_layout()
 
 # Export chart
-plt.savefig("outputs/gender_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig(GENDER_DISTRIBUTION, dpi=300, bbox_inches="tight")
 
 plt.show()
