@@ -14,3 +14,5 @@ LUNCH_DISTRIBUTION = f"{OUTPUT_DIR}/lunch_distribution.png"
 
 # PERCENTILE GRAPHS
 ETHNICITY_PERCENTILE = f"{OUTPUT_DIR}/ethnicity_percentile.png"
+PARENTAL_PERCENTILE = f"{OUTPUT_DIR}/parental_percentile.png"
+ETHNICITY_HEATMAP = f"{OUTPUT_DIR}/ethnicity_heatmap.png"
