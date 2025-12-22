@@ -11,3 +11,6 @@ PARENTAL_LEVEL_GRAPH = f"{OUTPUT_DIR}/parental_level_distribution.png"
 COURSE_DISTRIBUTION_GRAPH = f"{OUTPUT_DIR}/course_distribution.png"
 ETHNICITY_DISTRIBUTION = f"{OUTPUT_DIR}/ethnicity_distribution.png"
 LUNCH_DISTRIBUTION = f"{OUTPUT_DIR}/lunch_distribution.png"
+
+# PERCENTILE GRAPHS
+ETHNICITY_PERCENTILE = f"{OUTPUT_DIR}/ethnicity_percentile.png"
